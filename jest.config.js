@@ -1,4 +1,7 @@
 module.exports = {
+  errorOnDeprecated: false,
+  notify: true,
+  notifyMode: 'always',
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
   transform: {
     '^.+\\.vue$': 'vue-jest',
