@@ -11,4 +11,4 @@ const client = axios.create({
   }
 })
 
-export default {client}
+export default client
