@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import {API_URL} from '../config'
+import config from '../config'
 
 const client = axios.create({
-  baseURL: API_URL,
+  baseURL: config.API_URL,
   withCredentials: false,
   headers: {
     Accept: 'application/json',
