@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Search</router-link> |
-      <router-link to="/results">Results</router-link>
-    </div>
+    <v-alert
+      :value=error
+      type="error">
+      {{error}}
+    </v-alert>
     <router-view/>
   </div>
 </template>
@@ -16,16 +17,16 @@
   text-align: center;
   color: #00c853;
 }
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+
+<script>
+import {mapGetters} from 'vuex'
+
+const App = {
+  computed: {
+    ...mapGetters(['error'])
+  }
+}
+
+export default App
+</script>
