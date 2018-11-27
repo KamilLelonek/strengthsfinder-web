@@ -1,11 +1,18 @@
 <template>
   <div id="app">
+    <v-toolbar>
+      <v-toolbar-items>
+        <v-btn to="/" exact flat>Wyszukiwanie</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
     <v-alert
       :value=error
       type="error">
       {{error}}
     </v-alert>
-    <router-view data-app/>
+        <v-app data-app>
+      <router-view/>
+    </v-app>
   </div>
 </template>
 
