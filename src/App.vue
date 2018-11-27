@@ -5,7 +5,7 @@
       type="error">
       {{error}}
     </v-alert>
-    <router-view/>
+    <router-view data-app/>
   </div>
 </template>
 
@@ -20,11 +20,11 @@
 </style>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 
 const App = {
   computed: {
-    ...mapGetters(['error'])
+    ...mapState(['error'])
   }
 }
 
