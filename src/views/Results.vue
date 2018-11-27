@@ -6,8 +6,8 @@
     class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-left">{{ props.item.name }}</td>
-      <td class="text-xs-left">{{ props.item.city }}</td>
       <td class="text-xs-left">{{ props.item.occupation }}</td>
+      <td class="text-xs-left">{{ props.item.city }}</td>
       <td class="text-xs-right">{{ props.item.top1 }}</td>
       <td class="text-xs-right">{{ props.item.top2 }}</td>
       <td class="text-xs-right">{{ props.item.top3 }}</td>
