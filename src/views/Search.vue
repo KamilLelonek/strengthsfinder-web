@@ -11,12 +11,25 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field prepend-icon="person" name="name" label="Imię i nazwisko" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="name"
+                    :rules="[rules.required]"
+                    maxlength="20"
+                    prepend-icon="person"
+                    name="name"
+                    label="Imię i nazwisko"
+                    type="text">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary">Szukaj</v-btn>
+                <v-spacer ></v-spacer>
+                <v-btn
+                  color="primary"
+                  :disabled="hasName"
+                  @click="search">
+                  Szukaj
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -25,3 +38,36 @@
     </v-content>
   </v-app>
 </template>
+
+
+<script>
+import {mapActions} from 'vuex'
+
+const Search = {
+  data() {
+    return {
+      name: null,
+      rules: {
+        required: value => !!value || 'Wymagane!'
+      }
+    }
+  },
+  methods: {
+    search() {
+      this.load(this.name).then(result => {
+        if (result) {
+          this.$router.push({name: 'results'})
+        }
+      })
+    },
+    ...mapActions(['load'])
+  },
+  computed: {
+    hasName() {
+      return !this.name
+    }
+  }
+}
+
+export default Search
+</script>
