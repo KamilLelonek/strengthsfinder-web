@@ -25,7 +25,8 @@
               <v-spacer ></v-spacer>
               <v-btn
                 color="primary"
-                :disabled="hasName"
+                :disabled="hasName || isLoading"
+                :loading="isLoading"
                 @click="search">
                 Szukaj
               </v-btn>
@@ -39,7 +40,7 @@
 
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 const Search = {
   data() {
@@ -63,7 +64,8 @@ const Search = {
   computed: {
     hasName() {
       return !this.name
-    }
+    },
+    ...mapState(['isLoading'])
   }
 }
 
