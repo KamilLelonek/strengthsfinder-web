@@ -45,7 +45,6 @@ import {mapActions, mapState} from 'vuex'
 const Search = {
   data() {
     return {
-      name: null,
       rules: {
         required: value => !!value || 'Wymagane!'
       }
@@ -55,15 +54,29 @@ const Search = {
     search() {
       this.load(this.name).then(result => {
         if (result) {
-          this.$router.push({name: 'results'})
+          this.openResults()
         }
       })
+    },
+    openResults() {
+      this.$router.push({name: 'results', query: {name: this.name}})
+    },
+    query(name) {
+      return {query: {name}}
     },
     ...mapActions(['load'])
   },
   computed: {
     hasName() {
       return !this.name
+    },
+    name: {
+      get() {
+        return this.$route.query.name
+      },
+      set(name) {
+        this.$router.replace(this.query(name))
+      }
     },
     ...mapState(['isLoading'])
   }

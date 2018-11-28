@@ -3,6 +3,8 @@
     :headers="headers"
     :items="people"
     hide-actions
+    :loading="shouldLoad"
+    no-data-text="Trwa ładowanie..."
     class="elevation-1">
     <template slot="items" slot-scope="props">
       <td class="text-xs-left">{{ props.item.name }}</td>
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 const headers = [
   {
@@ -33,32 +35,38 @@ const headers = [
   },
   {
     text: 'Miasto',
-    value: 'city'
+    value: 'city',
+    sortable: false
   },
   {
     text: 'TOP 1',
     value: 'top1',
-    align: 'right'
+    align: 'right',
+    sortable: false
   },
   {
     text: 'TOP 2',
     value: 'top2',
-    align: 'right'
+    align: 'right',
+    sortable: false
   },
   {
     text: 'TOP 3',
     value: 'top3',
-    align: 'right'
+    align: 'right',
+    sortable: false
   },
   {
     text: 'TOP 4',
     value: 'top4',
-    align: 'right'
+    align: 'right',
+    sortable: false
   },
   {
     text: 'TOP 5',
     value: 'top5',
-    align: 'right'
+    align: 'right',
+    sortable: false
   }
 ]
 
@@ -68,7 +76,25 @@ const Results = {
       headers
     }
   },
+  mounted() {
+    if (this.shouldLoad) {
+      this.load(this.name).then(result => {
+        if (!result) {
+          console.log('error')
+        }
+      })
+    }
+  },
+  methods: {
+    ...mapActions(['load'])
+  },
   computed: {
+    name() {
+      return this.$route.query.name
+    },
+    shouldLoad() {
+      return this.name && !this.people.length
+    },
     ...mapState(['people'])
   }
 }
